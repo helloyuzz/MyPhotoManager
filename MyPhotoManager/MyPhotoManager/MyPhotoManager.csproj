@@ -32,7 +32,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAPICodePack-Core.1.1.0.0\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAPICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.ShellExtensions, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAPICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.ShellExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -65,7 +75,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -77,7 +89,54 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\start.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ai.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\avi.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\doc.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fla.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\html.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jpg.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mov.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pdf.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\png.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\psd.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\xls.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pictures.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wmp.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
