@@ -15,6 +15,9 @@ using Microsoft.WindowsAPICodePack.Shell;
 
 namespace MyPhotoManager {
     public partial class Form_Main:Form {
+        int showDirecotoryCount = 0;
+        int showPhotoCount = 0;
+        Dictionary<int,List<int>> directorySort = new Dictionary<int,List<int>>();
         public Form_Main() {
             InitializeComponent();
         }
@@ -116,8 +119,13 @@ namespace MyPhotoManager {
             }
             if(treeNode != null) {
                 treeNode.Expand();
-                tsl_CountTip.Text = "文件夹：" + treeNode.Nodes.Count;
+                showDirecotoryCount = treeNode.Nodes.Count;
+                updateTooltipCount();
             }
+        }
+
+        private void updateTooltipCount() {
+            tsl_CountTip.Text = string.Format("文件夹：{0}，照片：{1}",showDirecotoryCount,showPhotoCount);
         }
 
         private void toolMenu_OpenDirectory_Click(object sender,EventArgs e) {
@@ -163,7 +171,8 @@ namespace MyPhotoManager {
             } catch(Exception exc) {
                 tsl_ErrorLog.Text = exc.Message;
             }
-            tsl_CountTip.Text += "，照片文件：" + dgv_Main.Rows.Count;
+            showPhotoCount = dgv_Main.Rows.Count;
+            updateTooltipCount();
         }
 
         private void cbx_SearchAllDirectory_CheckedChanged(object sender,EventArgs e) {
@@ -175,6 +184,7 @@ namespace MyPhotoManager {
         }
 
         private void btn_ReadFile_Click(object sender,EventArgs e) {
+            directorySort.Clear();
             foreach(DataGridViewRow row in dgv_Main.Rows) {
                 string fileName = row.Cells["name_Column"].Value.ToString();
                 string filePath = row.Cells["path_Column"].Value.ToString();
@@ -186,8 +196,19 @@ namespace MyPhotoManager {
 
                 string createTime = row.Cells["createTime_Column"].Value.ToString();
                 string modifyTime = row.Cells["modifyTime_Column"].Value.ToString();
-                if(createTime.Equals(modifyTime)==false) {
+                DateTime dtCreateTime = DateTime.Parse(createTime);
+                if(createTime.Equals(modifyTime) == false) {
                     row.Cells["createTime_Column"].Style.ForeColor = Color.Red;
+                }
+                row.Cells["prevName_Column"].Value = "IMG_" + dtCreateTime.ToString("yyyyMMdd HH-mm-ss") + "_" + fileName;
+                if(directorySort.ContainsKey(dtCreateTime.Year)) {
+                    if(directorySort[dtCreateTime.Year].Contains(dtCreateTime.Month) == false) {
+                        directorySort[dtCreateTime.Year].Add(dtCreateTime.Month);
+                    }
+                } else {
+                    List<int> sortMonth = new List<int>();
+                    sortMonth.Add(dtCreateTime.Month);
+                    directorySort.Add(dtCreateTime.Year,sortMonth);
                 }
             }
         }
@@ -199,6 +220,13 @@ namespace MyPhotoManager {
 
             directory_ContextMenuStrip.Show(dgv_Main,dgv_Main.PointToClient(MousePosition));
             toolMenu_ImageName.Text = dgv_Main.Rows[e.RowIndex].Cells["name_Column"].Value.ToString();
+        }
+
+        private void toolMenu_SetPath_Click(object sender,EventArgs e) {
+            Dialog_SetPath dialog_SetPath = new Dialog_SetPath();
+            if(dialog_SetPath.ShowDialog() == DialogResult.OK) {
+                load_Config();
+            }
         }
     }
 }
