@@ -40,13 +40,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.dgv_Main = new System.Windows.Forms.DataGridView();
-            this.image_Column = new System.Windows.Forms.DataGridViewImageColumn();
-            this.name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.size_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.type_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.createTime_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.modifyTime_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.path_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btn_ReadFile = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -56,7 +49,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolMenu_SetPath = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,12 +59,20 @@
             this.label1 = new System.Windows.Forms.Label();
             this.directory_ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolMenu_ImageName = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolMenu_OpenDirectory = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolMenu_OpenDirectory = new System.Windows.Forms.ToolStripMenuItem();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.image_Column = new System.Windows.Forms.DataGridViewImageColumn();
+            this.name_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.size_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.type_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.createTime_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modifyTime_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.path_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prevName_Column = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -220,7 +221,8 @@
             this.type_Column,
             this.createTime_Column,
             this.modifyTime_Column,
-            this.path_Column});
+            this.path_Column,
+            this.prevName_Column});
             this.dgv_Main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_Main.Location = new System.Drawing.Point(0, 0);
             this.dgv_Main.Margin = new System.Windows.Forms.Padding(4);
@@ -232,50 +234,6 @@
             this.dgv_Main.Size = new System.Drawing.Size(1045, 650);
             this.dgv_Main.TabIndex = 0;
             this.dgv_Main.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Main_CellClick);
-            // 
-            // image_Column
-            // 
-            this.image_Column.HeaderText = "";
-            this.image_Column.Image = global::MyPhotoManager.Properties.Resources.pictures;
-            this.image_Column.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.image_Column.Name = "image_Column";
-            this.image_Column.Width = 5;
-            // 
-            // name_Column
-            // 
-            this.name_Column.HeaderText = "名称";
-            this.name_Column.Name = "name_Column";
-            this.name_Column.Width = 66;
-            // 
-            // size_Column
-            // 
-            this.size_Column.HeaderText = "大小";
-            this.size_Column.Name = "size_Column";
-            this.size_Column.Width = 66;
-            // 
-            // type_Column
-            // 
-            this.type_Column.HeaderText = "类型";
-            this.type_Column.Name = "type_Column";
-            this.type_Column.Width = 66;
-            // 
-            // createTime_Column
-            // 
-            this.createTime_Column.HeaderText = "创建时间";
-            this.createTime_Column.Name = "createTime_Column";
-            this.createTime_Column.Width = 96;
-            // 
-            // modifyTime_Column
-            // 
-            this.modifyTime_Column.HeaderText = "修改时间";
-            this.modifyTime_Column.Name = "modifyTime_Column";
-            this.modifyTime_Column.Width = 96;
-            // 
-            // path_Column
-            // 
-            this.path_Column.HeaderText = "Path_Column";
-            this.path_Column.Name = "path_Column";
-            this.path_Column.Width = 124;
             // 
             // panel4
             // 
@@ -373,16 +331,17 @@
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem2});
+            this.toolMenu_SetPath});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(72, 24);
             this.toolStripMenuItem1.Text = "文件(&A)";
             // 
-            // toolStripMenuItem2
+            // toolMenu_SetPath
             // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(233, 26);
-            this.toolStripMenuItem2.Text = "toolStripMenuItem2";
+            this.toolMenu_SetPath.Name = "toolMenu_SetPath";
+            this.toolMenu_SetPath.Size = new System.Drawing.Size(216, 26);
+            this.toolMenu_SetPath.Text = "设置目标文件夹(&E)";
+            this.toolMenu_SetPath.Click += new System.EventHandler(this.toolMenu_SetPath_Click);
             // 
             // toolStripMenuItem3
             // 
@@ -450,7 +409,7 @@
             this.toolStripSeparator2,
             this.toolMenu_OpenDirectory});
             this.directory_ContextMenuStrip.Name = "directory_ContextMenuStrip";
-            this.directory_ContextMenuStrip.Size = new System.Drawing.Size(238, 148);
+            this.directory_ContextMenuStrip.Size = new System.Drawing.Size(238, 120);
             // 
             // toolMenu_ImageName
             // 
@@ -461,18 +420,34 @@
             this.toolMenu_ImageName.Size = new System.Drawing.Size(237, 26);
             this.toolMenu_ImageName.Text = "文件名称";
             // 
-            // toolMenu_OpenDirectory
+            // toolStripSeparator1
             // 
-            this.toolMenu_OpenDirectory.Name = "toolMenu_OpenDirectory";
-            this.toolMenu_OpenDirectory.Size = new System.Drawing.Size(237, 26);
-            this.toolMenu_OpenDirectory.Text = "在资源管理器中打开(&X)";
-            this.toolMenu_OpenDirectory.Click += new System.EventHandler(this.toolMenu_OpenDirectory_Click);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(234, 6);
+            // 
+            // toolStripMenuItem7
+            // 
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(237, 26);
+            this.toolStripMenuItem7.Text = "显示详细信息(&D)";
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
             this.toolStripMenuItem6.Size = new System.Drawing.Size(237, 26);
             this.toolStripMenuItem6.Text = "刷新(&V)";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(234, 6);
+            // 
+            // toolMenu_OpenDirectory
+            // 
+            this.toolMenu_OpenDirectory.Name = "toolMenu_OpenDirectory";
+            this.toolMenu_OpenDirectory.Size = new System.Drawing.Size(237, 26);
+            this.toolMenu_OpenDirectory.Text = "在资源管理器中打开(&X)";
+            this.toolMenu_OpenDirectory.Click += new System.EventHandler(this.toolMenu_OpenDirectory_Click);
             // 
             // dataGridViewImageColumn1
             // 
@@ -482,21 +457,56 @@
             this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
             this.dataGridViewImageColumn1.Width = 5;
             // 
-            // toolStripSeparator1
+            // image_Column
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(214, 6);
+            this.image_Column.HeaderText = "";
+            this.image_Column.Image = global::MyPhotoManager.Properties.Resources.pictures;
+            this.image_Column.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.image_Column.Name = "image_Column";
+            this.image_Column.Width = 5;
             // 
-            // toolStripMenuItem7
+            // name_Column
             // 
-            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(237, 26);
-            this.toolStripMenuItem7.Text = "显示详细信息(&D)";
+            this.name_Column.HeaderText = "名称";
+            this.name_Column.Name = "name_Column";
+            this.name_Column.Width = 66;
             // 
-            // toolStripSeparator2
+            // size_Column
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(214, 6);
+            this.size_Column.HeaderText = "大小";
+            this.size_Column.Name = "size_Column";
+            this.size_Column.Width = 66;
+            // 
+            // type_Column
+            // 
+            this.type_Column.HeaderText = "类型";
+            this.type_Column.Name = "type_Column";
+            this.type_Column.Width = 66;
+            // 
+            // createTime_Column
+            // 
+            this.createTime_Column.HeaderText = "创建时间";
+            this.createTime_Column.Name = "createTime_Column";
+            this.createTime_Column.Width = 96;
+            // 
+            // modifyTime_Column
+            // 
+            this.modifyTime_Column.HeaderText = "修改时间";
+            this.modifyTime_Column.Name = "modifyTime_Column";
+            this.modifyTime_Column.Width = 96;
+            // 
+            // path_Column
+            // 
+            this.path_Column.HeaderText = "Path_Column";
+            this.path_Column.Name = "path_Column";
+            this.path_Column.Width = 124;
+            // 
+            // prevName_Column
+            // 
+            this.prevName_Column.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.prevName_Column.HeaderText = "实际文件";
+            this.prevName_Column.Name = "prevName_Column";
+            this.prevName_Column.Width = 96;
             // 
             // Form_Main
             // 
@@ -549,7 +559,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TreeView tvw_DirectoryTree;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem toolMenu_SetPath;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
@@ -567,6 +577,11 @@
         private System.Windows.Forms.ToolStripStatusLabel tsl_ErrorLog;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
         private System.Windows.Forms.Button btn_ReadFile;
+        private System.Windows.Forms.ToolStripMenuItem toolMenu_ImageName;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.DataGridViewImageColumn image_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn name_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn size_Column;
@@ -574,11 +589,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn createTime_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn modifyTime_Column;
         private System.Windows.Forms.DataGridViewTextBoxColumn path_Column;
-        private System.Windows.Forms.ToolStripMenuItem toolMenu_ImageName;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn prevName_Column;
     }
 }
 
